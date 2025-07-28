@@ -36,8 +36,8 @@ ChatRoom/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Shubhankar45/ChatRoom.git
-cd ChatRoom
+git clone https://github.com/Shubhankar45/StudyBuddy.git
+cd StudyBuddy
 ```
 
 ### 2. Install dependencies
