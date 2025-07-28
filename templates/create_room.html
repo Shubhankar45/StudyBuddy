@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Create Room - StudySync{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card study-card">
+            <div class="card-header gradient-bg text-white text-center">
+                <h4 class="mb-0">
+                    <i class="fas fa-plus-circle me-2"></i>Create New Study Room
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="room_name" class="form-label">Room Name</label>
+                        <input type="text" class="form-control" id="room_name" name="room_name" 
+                               placeholder="e.g., Math Study Group" required>
+                        <small class="form-text text-muted">Choose a descriptive name for your study room</small>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Room Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <small class="form-text text-muted">Set a password to protect your room from unauthorized access</small>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Room Features:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>Collaborative study timers</li>
+                            <li>Real-time progress tracking</li>
+                            <li>Shared notes and discussions</li>
+                            <li>Member leaderboards</li>
+                        </ul>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 btn-lg">
+                        <i class="fas fa-plus-circle me-2"></i>Create Room
+                    </button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

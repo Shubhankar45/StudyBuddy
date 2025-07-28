@@ -1,0 +1,272 @@
+/* =====================================
+   🌟 StudySync - Light UI Theme Styles
+   ===================================== */
+
+:root {
+    --font-base: 'Poppins', sans-serif;
+    --font-mono: 'Courier New', monospace;
+    --color-primary: #4e73df;
+    --color-success: #1cc88a;
+    --color-warning: #f6c23e;
+    --color-info: #36b9cc;
+    --color-danger: #e74a3b;
+    --color-light: #f8f9fc;
+    --color-muted: #858796;
+    --border-radius: 0.75rem;
+    --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Base */
+body {
+    font-family: var(--font-base);
+    background-color: var(--color-light);
+    color: #343a40;
+}
+
+a {
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2e59d9;
+    text-decoration: none;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Header */
+.card-header {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-info));
+    color: white;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    text-align: center;
+    padding: 1.2rem;
+}
+
+/* Form Controls */
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+}
+
+/* Timer */
+.timer-display {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.timer-controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Progress Dots */
+.progress-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+    border: 2px solid #dee2e6;
+}
+
+.status-not-started { background-color: #d1d3e2; }
+.status-in-progress { background-color: var(--color-warning); animation: pulse 1.5s infinite; }
+.status-completed { background-color: var(--color-success); }
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(246, 194, 62, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(246, 194, 62, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(246, 194, 62, 0); }
+}
+
+/* Stats Card */
+.stats-card {
+    background: #f1f4fb;
+    border: 1px solid #dfe3ee;
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* User Badge */
+.user-badge {
+    background: #eef1f8;
+    color: #4b5563;
+    padding: 0.35rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+}
+
+.user-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Syllabus Form */
+.topic-section {
+    background-color: #f9f9fb;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Tables */
+.table-study {
+    font-size: 0.95rem;
+    border-color: #e2e8f0;
+}
+
+.table-study th {
+    background-color: #e8efff;
+    font-weight: 600;
+}
+
+.table-study td {
+    vertical-align: middle;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #f0f4ff, #e0fff6);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+/* Features Section */
+.features-section .card {
+    background: #ffffff;
+    border: 1px solid #ebedf0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.features-section .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top: 3px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Alerts */
+.alert {
+    border-radius: 0.5rem;
+}
+
+.alert-success {
+    background-color: #e6f9f1;
+    color: var(--color-success);
+}
+
+.alert-danger {
+    background-color: #fdecea;
+    color: var(--color-danger);
+}
+
+.alert-warning {
+    background-color: #fff8e5;
+    color: var(--color-warning);
+}
+
+.alert-info {
+    background-color: #e9f7fc;
+    color: var(--color-info);
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #eaeaea;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ced4da;
+    border-radius: 4px;
+}
+
+/* Utilities */
+.text-gradient {
+    background: linear-gradient(to right, var(--color-primary), var(--color-success));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.shadow-soft {
+    box-shadow: var(--box-shadow);
+}
