@@ -270,3 +270,7 @@ footer {
 .shadow-soft {
     box-shadow: var(--box-shadow);
 }
+.bg-dark {
+   
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}

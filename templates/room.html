@@ -169,7 +169,7 @@
                     <div class="tab-pane fade show active" id="text-notes" role="tabpanel">
                         <div class="notes-section mb-3" id="notes-container">
                             {% for note in notes %}
-                            <div class="note-item p-3 mb-2 bg-dark rounded">
+                            <div class="note-item p-3 mb-2 rounded bg-light">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div class="flex-grow-1">
                                         <strong class="text-primary">{{ note.author_name if note.author_name else 'Unknown' }}</strong>
@@ -475,14 +475,15 @@ socket.on('timer_stopped', (data) => {
 socket.on('note_added', (data) => {
     // Add new note to the notes container
     const notesContainer = document.getElementById('notes-container');
+    const currentUserId = {{ current_user.id | tojson}};
     const noteHtml = `
-        <div class="note-item p-3 mb-2 bg-dark rounded">
+        <div class="note-item p-3 mb-2 rounded">
             <div class="d-flex justify-content-between align-items-start">
                 <div class="flex-grow-1">
                     <strong class="text-primary">${data.author_name}</strong>
                     <small class="text-muted ms-2">${data.created_at}</small>
                 </div>
-                ${data.author_id === {{ current_user.id }} ? `
+                ${data.author_id === currentUserId ? `
                 <div class="dropdown">
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-ellipsis-v"></i>
@@ -582,25 +583,27 @@ document.addEventListener('DOMContentLoaded', function() {
     function addTopicEditor(topicData = null) {
         topicCount++;
         const topicHtml = `
-            <div class="topic-editor card mb-3" data-topic-index="${topicCount}">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control topic-name" placeholder="Topic Name" value="${topicData ? topicData.name : ''}" required>
-                        </div>
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-sm btn-success add-subtopic-btn">
-                                <i class="fas fa-plus me-1"></i>Add Subtopic
-                            </button>
-                            <button type="button" class="btn btn-sm btn-danger remove-topic-btn">
-                                <i class="fas fa-trash"></i>
-                            </button>
+            <div>
+                <div class="topic-editor card mb-3" data-topic-index="${topicCount}">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control topic-name" placeholder="Topic Name" value="${topicData ? topicData.name : ''}" required />
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-sm btn-success add-subtopic-btn">
+                                    <i class="fas fa-plus me-1"></i>Add Subtopic
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger remove-topic-btn">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="subtopics-container">
-                        <!-- Subtopics will be added here -->
+                    <div class="card-body">
+                        <div class="subtopics-container">
+                            <!-- Subtopics will be added here -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -632,10 +635,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const subtopicHtml = `
             <div class="subtopic-editor row mb-2">
                 <div class="col-6">
-                    <input type="text" class="form-control subtopic-name" placeholder="Subtopic Name" value="${subtopicData ? subtopicData.name : ''}" required>
+                    <input type="text" class="form-control subtopic-name" placeholder="Subtopic Name" value="${subtopicData ? subtopicData.name : ''}" required />
                 </div>
                 <div class="col-3">
-                    <input type="number" class="form-control subtopic-time" placeholder="Minutes" min="1" value="${subtopicData ? subtopicData.estimated_time : ''}" required>
+                    <input type="number" class="form-control subtopic-time" placeholder="Minutes" min="1" value="${subtopicData ? subtopicData.estimated_time : ''}" required />
                 </div>
                 <div class="col-auto">
                     <button type="button" class="btn btn-sm btn-danger remove-subtopic-btn">
@@ -658,11 +661,11 @@ document.addEventListener('DOMContentLoaded', function() {
     {% if topics %}
     {% for topic in topics %}
     addTopicEditor({
-        name: '{{ topic.name }}',
+        name: "{{ topic.name|escapejs }}",
         subtopics: [
             {% for subtopic in topic.subtopics %}
             {
-                name: '{{ subtopic.name }}',
+                name: "{{ subtopic.name|escapejs }}",
                 estimated_time: {{ subtopic.estimated_time }}
             }{% if not loop.last %},{% endif %}
             {% endfor %}
