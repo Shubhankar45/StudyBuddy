@@ -74,35 +74,41 @@ def dashboard():
                          created_rooms=created_rooms, 
                          joined_rooms=joined_rooms)
 
-@app.route('/create_room', methods=['GET', 'POST'])
-@login_required
+@app.route("/create_room", methods=["GET", "POST"])
+@login_required  # This ensures only logged-in users can access
 def create_room():
-    if request.method == 'POST':
-        room_name = request.form.get('room_name')
-        password = request.form.get('password')
-        
-        room = Room()
-        room.room_id = Room.generate_room_id()
-        room.name = room_name
-        room.creator_id = current_user.id
-        room.set_password(password)
-        
-        db.session.add(room)
-        db.session.commit()
-        
-        # Add creator as member
+    if request.method == "POST":
+        room_name = request.form.get("room_name")
+        password = request.form.get("password")
+
+        # ✅ Validation: Check missing form fields
+        if not room_name or not password:
+            flash("Room name and password are required.")
+            return redirect(url_for("create_room"))
+
         try:
-            db.session.refresh(room)  # Refresh to get the relationships
+            room = Room(
+                room_id=Room.generate_room_id(),
+                name=room_name,
+                creator=current_user
+            )
+            room.set_password(password)
+
+            # ✅ Add current user as member
             room.members.append(current_user)
+
+            db.session.add(room)
             db.session.commit()
+
+            return redirect(url_for("view_room", room_id=room.room_id))
+
         except Exception as e:
-            print(f"Error adding member: {e}")
-            db.session.rollback()
-        
-        flash(f'Room created successfully! Room ID: {room.room_id}', 'success')
-        return redirect(url_for('room', room_id=room.room_id))
-    
-    return render_template('create_room.html')
+            # ✅ Detailed error log
+            traceback.print_exc()
+            flash("An error occurred while creating the room.")
+            return redirect(url_for("create_room"))
+
+    return render_template("create_room.html")
 
 @app.route('/join_room', methods=['GET', 'POST'])
 @login_required
