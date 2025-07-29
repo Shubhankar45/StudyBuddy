@@ -661,11 +661,11 @@ document.addEventListener('DOMContentLoaded', function() {
     {% if topics %}
     {% for topic in topics %}
     addTopicEditor({
-        name: "{{ topic.name|escapejs }}",
+        name: "{{ topic.name|tojson }}",
         subtopics: [
             {% for subtopic in topic.subtopics %}
             {
-                name: "{{ subtopic.name|escapejs }}",
+                name: "{{ subtopic.name|tojson }}",
                 estimated_time: {{ subtopic.estimated_time }}
             }{% if not loop.last %},{% endif %}
             {% endfor %}
